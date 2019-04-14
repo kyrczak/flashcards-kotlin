@@ -1,6 +1,8 @@
 package com.example.fiszki
 
-class Fiszka (
+// The file should be called Fiszka.kt
+
+data class Fiszka (
     val polishWord: String,
     val englishWord: String,
     val number: Int
