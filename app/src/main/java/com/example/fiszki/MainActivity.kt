@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager
+import com.google.gson.Gson
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -14,9 +15,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         val fiszki = mutableListOf<Fiszka>()
+        val json: String = Gson().toJson(fiszki)
         addButton.setOnClickListener {
-            startActivity(Intent(this,AdddingFiszka()::class.java))
-
+            val i = Intent(this,AdddingFiszka::class.java)
+            i.putExtra("dane",json)
+            startActivity(i)
         }
         fiszki.add(Fiszka("osoba","person",fiszki.size))
         fiszki.add(Fiszka("koło","wheel",fiszki.size))
