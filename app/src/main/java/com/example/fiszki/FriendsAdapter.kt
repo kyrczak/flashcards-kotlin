@@ -18,12 +18,10 @@ class FriendsAdapter(private val fiszki: MutableList<Fiszka>) : RecyclerView.Ada
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.PLWord.text = fiszki[position].polishWord
         holder.ENGWord.text = fiszki[position].englishWord
-        holder.NMB.text = fiszki[position].number.toString() + "."
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val ENGWord = view.englishWord
         val PLWord = view.polishWord
-        val NMB = view.number
     }
 }

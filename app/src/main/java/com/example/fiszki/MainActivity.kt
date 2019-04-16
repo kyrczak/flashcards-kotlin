@@ -1,5 +1,6 @@
 package com.example.fiszki
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -9,21 +10,27 @@ import com.google.gson.reflect.TypeToken
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import java.io.File
 
 class MainActivity : AppCompatActivity() {
+    companion object {
+
+        lateinit  var appContext: Context
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        val fiszki = mutableListOf<Fiszka>()
-        val json: String = Gson().toJson(fiszki)
         addButton.setOnClickListener {
             startActivity(Intent(this,AdddingFiszka::class.java))
         }
         // @miloszratajczyk (https://github.com/miloszratajczyk)
         // Look at the list.json file
         // Also updated User.kt
-        val jsonString = applicationContext.assets.open("list.json").bufferedReader().use { it.readText() }
+        val context = MainActivity.appContext
+        val file:File = File(context.filesDir, "list.json")
+        val jsonString = file.inputStream().readBytes().toString(Charsets.UTF_8)
         val flashcardsType = object : TypeToken<MutableList<Fiszka>>() {}.type
         val flashcards = Gson().fromJson<MutableList<Fiszka>>(jsonString, flashcardsType)
 
