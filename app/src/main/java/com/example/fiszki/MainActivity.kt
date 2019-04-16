@@ -18,16 +18,8 @@ class MainActivity : AppCompatActivity() {
         val fiszki = mutableListOf<Fiszka>()
         val json: String = Gson().toJson(fiszki)
         addButton.setOnClickListener {
-            val i = Intent(this, AdddingFiszka::class.java)
-            i.putExtra("dane", json)
-            startActivity(i)
+            startActivity(Intent(this,AdddingFiszka::class.java))
         }
-        fiszki.add(Fiszka("osoba", "person", fiszki.size))
-        fiszki.add(Fiszka("koło", "wheel", fiszki.size))
-        fiszki.add(Fiszka("jeden", "one", fiszki.size))
-        fiszki.add(Fiszka("dwa", "two", fiszki.size))
-
-
         // @miloszratajczyk (https://github.com/miloszratajczyk)
         // Look at the list.json file
         // Also updated User.kt
