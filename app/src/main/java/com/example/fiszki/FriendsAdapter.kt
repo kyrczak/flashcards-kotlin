@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.row_friend.view.*
 import java.text.FieldPosition
 
-class FriendsAdapter(private val fiszki: MutableList<Fiszka>) : RecyclerView.Adapter<FriendsAdapter.ViewHolder>() {
+class FiszkiAdapter(private val fiszki: MutableList<Fiszka>) : RecyclerView.Adapter<FiszkiAdapter.ViewHolder>() {
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
         val view = LayoutInflater.from(p0.context).inflate(R.layout.row_friend,p0,false)
         return ViewHolder(view)

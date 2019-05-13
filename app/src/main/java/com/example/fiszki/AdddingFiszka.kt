@@ -4,20 +4,25 @@ import android.app.Activity
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_adding_fiszka.*
 import java.io.File
 import java.io.FileWriter
 
-class AdddingFiszka : AppCompatActivity(){
+class AdddingFiszka() : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_adding_fiszka)
         val context = applicationContext
-        val file = File(context.filesDir,"list.json")
+        val file = File(filesDir,"list.json")
         textView5.text = file.absolutePath
-        val gson = Gson()
+        var jsonString= file.readText()
+        val flashcardsType = object : TypeToken<MutableList<Fiszka>>() {}.type
+        val flashcards = Gson().fromJson<MutableList<Fiszka>>(jsonString, flashcardsType)
         saveButton.setOnClickListener {
-            gson.toJson(Fiszka(polishWord.toString(),englishWord.toString()), FileWriter(file))
+            flashcards.add(Fiszka(polishWord.text.toString(),englishWord.text.toString()))
+            jsonString = Gson().toJson(flashcards)
+            file.writeText(jsonString)
             this.finish()
         }
     }
